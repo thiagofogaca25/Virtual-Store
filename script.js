@@ -36,6 +36,7 @@ function loadProducts() {
         
         var addToCartButton = document.createElement('button');
         addToCartButton.innerText = 'Add to Cart';
+        addToCartButton.classList.add('btn','btn-info')
         addToCartButton.addEventListener('click', addToCart.bind(null, product));
         
         productElement.appendChild(colleft);
@@ -54,10 +55,34 @@ function loadProducts() {
 function addToCart(product) {
     var cartItemsContainer = document.getElementById('cart-items');
     
-    var cartItem = document.createElement('li');
-    cartItem.innerText = product.name + ' - R$ ' + product.price.toFixed(2);
-    
-    cartItemsContainer.appendChild(cartItem);
+    var divItems = document.createElement('div');
+    divItems.classList.add('row','w-100','m-0','p-0');
+
+    var cartItemsInfo = document.createElement('div');
+    cartItemsInfo.classList.add('col-9','w-50','p-0','m-0');
+
+    var cartItemName = document.createElement('ol');
+    cartItemName.innerText = product.name;
+    cartItemName.classList.add('text-start','p-1');
+
+    var cartItemPrice = document.createElement('ol');
+    cartItemPrice.innerText = '$ ' + product.price.toFixed(2);
+    cartItemPrice.classList.add('text-start','p-1');
+
+    var cartButton = document.createElement('button');
+    cartButton.innerText = 'Delete';
+    cartButton.classList.add('btn','btn-danger','col-4','w-25','m-auto');
+
+    var cartHr = document.createElement('hr');
+
+
+    divItems.appendChild(cartItemsInfo);
+    cartItemsInfo.appendChild(cartItemName);
+    cartItemsInfo.appendChild(cartItemPrice);
+    divItems.appendChild(cartButton);
+    divItems.appendChild(cartHr);
+
+    cartItemsContainer.appendChild(divItems);
     
     var cartTotal = document.getElementById('cart-total');
     var currentTotal = parseFloat(cartTotal.innerText);
